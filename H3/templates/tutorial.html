@@ -1,0 +1,322 @@
+{% extends "base.html" %}
+{%block content%}
+<div class="floating-background">
+</div>
+
+<div class="author-signature">
+    Created by Freya Huang
+</div>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h1 class="text-center display-4 mb-5">How to Play</h1>
+
+      <!-- Request Classification Example -->
+      <div class="tutorial-section mb-5">
+        <h2 class="h3 mb-4">Classifying Requests</h2>
+        <div class="example-request p-4 bg-light rounded">
+          <h3 class="h5 mb-3">Example Request:</h3>
+          <p class="request-text">
+            "Find research papers about climate change and write a summary analysis"
+          </p>
+          <div class="keyword-analysis mt-4">
+            <h4 class="h5">Step 1: Mark Keywords</h4>
+            <div class="p-2 border rounded mb-2">
+              <span class="word-span marked-search">Find</span>
+              <span class="word-span marked-search">research</span>
+              <span class="word-span">papers</span>
+              <span class="word-span">about</span>
+              <span class="word-span">climate</span>
+              <span class="word-span">change</span>
+              <span class="word-span">and</span>
+              <span class="word-span marked-text">write</span>
+              <span class="word-span marked-text">summary</span>
+              <span class="word-span marked-text">analysis</span>
+            </div>
+            <div class="keyword-types mt-2">
+              <button class="btn btn-sm btn-outline-warning me-2">Text</button>
+              <button class="btn btn-sm btn-outline-success me-2">Image</button>
+              <button class="btn btn-sm btn-outline-info me-2 active">Search</button>
+              <button class="btn btn-sm btn-outline-purple">Code</button>
+            </div>
+          </div>
+          <div class="ai-hint mt-4">
+            <h4 class="h5">Step 2: Check Department Scores</h4>
+            <div class="score-bar mb-2">
+              <label>Text Generation</label>
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" 
+                     data-dept="text"
+                     style="width: 50%">50%</div>
+              </div>
+            </div>
+            <div class="score-bar mb-2">
+              <label>Image Generation</label>
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" 
+                     data-dept="image"
+                     style="width: 0%">0%</div>
+              </div>
+            </div>
+            <div class="score-bar mb-2">
+              <label>Search</label>
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" 
+                     data-dept="search"
+                     style="width: 50%">50%</div>
+              </div>
+            </div>
+            <div class="score-bar mb-2">
+              <label>Code</label>
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" 
+                     data-dept="code"
+                     style="width: 0%">0%</div>
+              </div>
+            </div>
+          </div>
+          <div class="department-selection mt-4">
+            <h4 class="h5">Step 3: Select Departments</h4>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" checked>
+              <label class="form-check-label" style="color: #ffc107; font-weight: bold;">
+                Text Generation Department
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox">
+              <label class="form-check-label">
+                Image Generation Department
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" checked>
+              <label class="form-check-label" style="color: #17a2b8; font-weight: bold;">
+                Search Department
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox">
+              <label class="form-check-label">
+                Code Department
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tools Explanation -->
+      <div class="tutorial-section mb-5">
+        <h2 class="h3 mb-4">How It Works</h2>
+        <div class="tools-explanation">
+          <ul class="list-group">
+            <li class="list-group-item">
+              <h3 class="h5">1. Analyze Keywords</h3>
+              <p>Click on important words in the request and select their type (Text, Image, Search, or Code).</p>
+            </li>
+            <li class="list-group-item">
+              <h3 class="h5">2. Check Confidence Scores</h3>
+              <p>The system will calculate how relevant each department is based on your keyword selections.</p>
+            </li>
+            <li class="list-group-item">
+              <h3 class="h5">3. Select Departments</h3>
+              <p>Choose the appropriate department(s) based on the confidence scores. Some requests may need multiple departments!</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Scoring Rules -->
+      <div class="tutorial-section mb-5">
+        <h2 class="h3 mb-4">Scoring Rules</h2>
+        <div class="scoring-rules p-4 bg-light rounded">
+          <ul class="list-unstyled">
+            <li class="mb-3">
+              <span class="badge bg-success">+10 points</span>
+              Correct department selection
+            </li>
+            <li class="mb-3">
+              <span class="badge bg-danger">+0 points</span>
+              Incorrect selection
+            </li>
+            <li class="mb-3">
+              <span class="badge bg-warning text-dark">Important!</span>
+              You must mark keywords before submitting
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Start Game Button -->
+      <div class="text-center mb-5">
+        <button class="btn btn-primary btn-lg px-5 py-3" onclick="window.location.href='/game'">
+          Begin Game
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.word-span {
+  padding: 2px 4px;
+  margin: 0 2px;
+  border-radius: 3px;
+  background-color: #f8f9fa;
+}
+
+.marked-text {
+  background-color: #ffc107;
+}
+
+.marked-image {
+  background-color: #90EE90;
+}
+
+.marked-search {
+  background-color: #87CEEB;
+}
+
+.marked-code {
+  background-color: #e6e6fa;
+}
+
+.btn-outline-purple {
+  color: #6f42c1;
+  border-color: #6f42c1;
+}
+
+.btn-outline-purple:hover,
+.btn-outline-purple:active,
+.btn-outline-purple.active {
+  background-color: #6f42c1;
+  color: #fff;
+}
+
+.progress-bar[data-dept="text"] {
+  background-color: #ffc107;
+}
+
+.progress-bar[data-dept="image"] {
+  background-color: #28a745;
+}
+
+.progress-bar[data-dept="search"] {
+  background-color: #17a2b8;
+}
+
+.progress-bar[data-dept="code"] {
+  background-color: #6f42c1;
+}
+
+.keyword-types .btn-outline-warning.active {
+  background-color: #ffc107;
+  color: #000;
+}
+
+.progress {
+  height: 20px;
+  background-color: #e9ecef;
+}
+
+.tutorial-section {
+  border-bottom: 1px solid #dee2e6;
+  padding-bottom: 2rem;
+}
+
+.tutorial-section:last-child {
+  border-bottom: none;
+}
+
+.floating-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: #f8f9fa;
+    overflow: hidden;
+}
+
+.floating-shape {
+    position: absolute;
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+.author-signature {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-family: 'Palatino', serif;
+    font-size: 1.2rem;
+    color: #666;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+@keyframes float {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    50% {
+        transform: translate(20px, 20px) rotate(180deg);
+    }
+    100% {
+        transform: translate(0, 0) rotate(360deg);
+    }
+}
+</style>
+
+<script>
+function createFloatingBackground() {
+    const background = document.querySelector('.floating-background');
+    const colors = {
+        text: '#ffc107',    // warning yellow
+        image: '#28a745',   // success green
+        search: '#17a2b8',  // info blue
+        code: '#6f42c1'     // purple
+    };
+    
+    const shapes = [
+        (size) => `<circle cx="${size/2}" cy="${size/2}" r="${size/2}" />`,
+        (size) => `<rect width="${size}" height="${size}" />`,
+        (size) => `<polygon points="0,${size} ${size/2},0 ${size},${size}" />`,
+        (size) => `<polygon points="${size/2},0 ${size},${size/2} ${size/2},${size} 0,${size/2}" />`
+    ];
+    
+    for (let i = 0; i < 20; i++) {
+        const size = Math.random() * 50 + 30;
+        const shape = shapes[Math.floor(Math.random() * shapes.length)];
+        const color = Object.values(colors)[Math.floor(Math.random() * Object.keys(colors).length)];
+        
+        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        svg.setAttribute('width', size);
+        svg.setAttribute('height', size);
+        svg.setAttribute('viewBox', `0 0 ${size} ${size}`);
+        svg.innerHTML = shape(size);
+        
+        const wrapper = document.createElement('div');
+        wrapper.classList.add('floating-shape');
+        wrapper.appendChild(svg);
+        
+        wrapper.style.left = `${Math.random() * 100}%`;
+        wrapper.style.top = `${Math.random() * 100}%`;
+        
+        const duration = Math.random() * 10 + 10;
+        const delay = Math.random() * -20;
+        
+        wrapper.style.animation = `float ${duration}s linear ${delay}s infinite`;
+        
+        svg.querySelector('*').style.fill = color;
+        
+        background.appendChild(wrapper);
+    }
+}
+
+// 页面加载时初始化背景
+window.addEventListener('load', createFloatingBackground);
+</script>
+{%endblock%}

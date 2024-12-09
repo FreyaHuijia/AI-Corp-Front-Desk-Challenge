@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{%block content%}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8 text-center">
+      <h1 class="display-3 mb-4">Welcome to AI Corp</h1>
+      <h2 class="display-6 mb-4">Front Desk Challenge</h2>
+      
+      <div class="story-intro my-5">
+        <p class="lead mb-4">
+          You are a new employee at AI Corp, a cutting-edge AI company. Your job is to work at the front desk 
+          and correctly classify and route user requests to the appropriate AI department.
+        </p>
+        <p class="lead mb-5">
+          Your performance will be scored based on accuracy and speed. Are you ready to prove your skills?
+        </p>
+      </div>
+
+      <button class="btn btn-primary btn-lg px-5 py-3" onclick="window.location.href='/tutorial'">
+        Start Working
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="floating-background">
+</div>
+
+<div class="author-signature">
+    Created by Freya Huang
+</div>
+
+<style>
+.floating-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: #f8f9fa;
+    overflow: hidden;
+}
+
+.floating-shape {
+    position: absolute;
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+.author-signature {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-family: 'Palatino', serif;
+    font-size: 1.2rem;
+    color: #666;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+@keyframes float {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    50% {
+        transform: translate(20px, 20px) rotate(180deg);
+    }
+    100% {
+        transform: translate(0, 0) rotate(360deg);
+    }
+}
+</style>
+
+<script>
+function createFloatingBackground() {
+    const background = document.querySelector('.floating-background');
+    const colors = {
+        text: '#ffc107',    // warning yellow
+        image: '#28a745',   // success green
+        search: '#17a2b8',  // info blue
+        code: '#6f42c1'     // purple
+    };
+    
+    const shapes = [
+        (size) => `<circle cx="${size/2}" cy="${size/2}" r="${size/2}" />`,
+        (size) => `<rect width="${size}" height="${size}" />`,
+        (size) => `<polygon points="0,${size} ${size/2},0 ${size},${size}" />`,
+        (size) => `<polygon points="${size/2},0 ${size},${size/2} ${size/2},${size} 0,${size/2}" />`
+    ];
+    
+    for (let i = 0; i < 20; i++) {
+        const size = Math.random() * 50 + 30;
+        const shape = shapes[Math.floor(Math.random() * shapes.length)];
+        const color = Object.values(colors)[Math.floor(Math.random() * Object.keys(colors).length)];
+        
+        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        svg.setAttribute('width', size);
+        svg.setAttribute('height', size);
+        svg.setAttribute('viewBox', `0 0 ${size} ${size}`);
+        svg.innerHTML = shape(size);
+        
+        const wrapper = document.createElement('div');
+        wrapper.classList.add('floating-shape');
+        wrapper.appendChild(svg);
+        
+        wrapper.style.left = `${Math.random() * 100}%`;
+        wrapper.style.top = `${Math.random() * 100}%`;
+        
+        const duration = Math.random() * 10 + 10;
+        const delay = Math.random() * -20;
+        
+        wrapper.style.animation = `float ${duration}s linear ${delay}s infinite`;
+        
+        svg.querySelector('*').style.fill = color;
+        
+        background.appendChild(wrapper);
+    }
+}
+
+// 页面加载时初始化背景
+window.addEventListener('load', createFloatingBackground);
+</script>
+{%endblock%}
